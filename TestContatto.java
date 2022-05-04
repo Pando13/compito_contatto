@@ -4,6 +4,7 @@ class TestContatto{
 	public static void main(String arg[]){
 		Scanner input=new Scanner(System.in);
 		Boolean trovato;
+		char char_temp;
 		String cognome,nome,cellulare,vuota,nome_temp,cognome_temp;
 		int anno_nascita,scelta,eta,anno_corrente,temp,temp2,somma,i=0,cont;
 		Contatto rubrica[]=new Contatto[1000];
@@ -21,6 +22,10 @@ class TestContatto{
 			System.out.println("premi 9 per contare quanti contatti hanno un'età maggiore della media");
 			System.out.println("premi 10 per l'età massima");
 			System.out.println("premi 11 per l'età minima");
+			System.out.println("premi 12 per contare quanti nomi contengono la stringa anna");
+			System.out.println("premi 13 per prendere una stringa in input e contare quanti nomi contengono la stringa");
+			System.out.println("premi 14 per contare quanti cognomi finiscono con la lettera 'a'");
+			System.out.println("premi 15 per contare quanti cognomi finiscono con una consonante");
 
 			scelta=input.nextInt();
 			vuota=input.nextLine();	
@@ -101,7 +106,7 @@ class TestContatto{
 				case 5:
 					cognome_temp=rubrica[0].cognome;
 					for(cont=1;cont<i;cont++){
-						if(rubrica[cont].cognome.compareTo(cognome_temp)>0){
+						if(rubrica[cont].cognome.compareTo(cognome_temp)<0){
 							cognome_temp=rubrica[cont].cognome;
 						}
 					}
@@ -122,7 +127,7 @@ class TestContatto{
 					temp=0;
 					trovato=false;
 					for(cont=0;cont<i;cont++){
-						if(rubrica[cont].cognome.charAt(0)=='A'){
+						if(rubrica[cont].cognome.toUpperCase().charAt(0)=='A'){
 							temp++;
 							trovato=true;
 						}
@@ -184,6 +189,119 @@ class TestContatto{
 							}
 						}
 						System.out.println("numero di contatti che hanno un'eta' maggiore della media: "+temp2);
+					}
+					break;
+
+				case 10:
+					System.out.println("dammi l'anno corrente");
+					anno_corrente=input.nextInt();
+					vuota=input.nextLine();
+					temp=0;
+					trovato=false;
+					for(cont=0;cont<i;cont++){
+						eta=rubrica[cont].calcolaEta(anno_corrente);
+						if(eta!=-1 && eta>temp){
+							temp=eta;
+							trovato=true;
+						}
+					}
+					if(!trovato){
+						System.out.println("non ci sono contatti che hanno un'eta' valida");
+					}else{
+						System.out.println("eta' massima: "+temp);
+					}
+					break;
+				
+				case 11:
+					System.out.println("dammi l'anno corrente");
+					anno_corrente=input.nextInt();
+					vuota=input.nextLine();
+					temp=0;
+					trovato=false;
+					for(cont=0;cont<i;cont++){
+						eta=rubrica[cont].calcolaEta(anno_corrente);
+						if(eta!=-1){
+							if (!trovato) {
+								temp=eta;
+								trovato=true;
+							}else{
+								if(eta<temp){
+									temp=eta;
+								}
+							}
+						}
+					}
+					if(!trovato){
+						System.out.println("non ci sono contatti che hanno un'eta' valida");
+					}else{
+						System.out.println("eta' minima: "+temp);
+					}
+					break;
+
+				case 12:
+					temp=0;
+					trovato=false;
+					for(cont=0;cont<i;cont++){
+						if (rubrica[cont].nome.toLowerCase().indexOf("anna") != -1){
+							temp++;
+							trovato=true;
+						}
+					}
+					if(!trovato){
+						System.out.println("non ci sono contatti che hanno un nome contenente la parola 'anna'");
+					}else{
+						System.out.println("numero di contatti che hanno un nome contenente la parola 'anna': "+temp);
+					}
+					break;
+
+				case 13:
+					temp=0;
+					trovato=false;
+					System.out.println("dammi la stringa da cercare nei nomi");
+					nome_temp=input.nextLine();
+					for(cont=0;cont<i;cont++){
+						if (rubrica[cont].nome.toLowerCase().indexOf(nome_temp) != -1){
+							temp++;
+							trovato=true;
+						}
+					}
+					if(!trovato){
+						System.out.println("non ci sono contatti che hanno un nome contenente la parola '"+nome_temp+"'");
+					}else{
+						System.out.println("numero di contatti che hanno un nome contenente la parola '"+nome_temp+"': "+temp);
+					}
+					break;
+
+				case 14:
+					temp=0;
+					trovato=false;
+					for(cont=0;cont<i;cont++){
+						if(rubrica[cont].cognome.toUpperCase().charAt(rubrica[cont].cognome.length()-1)=='A'){
+							temp++;
+							trovato=true;
+						}
+					}
+					if(!trovato){
+						System.out.println("non ci sono cognomi che finiscono con 'a'");
+					}else{
+						System.out.println("numero di cognomi che finiscono con 'a': "+temp);
+					}
+					break;
+
+				case 15:
+					temp=0;
+					trovato=false;
+					for(cont=0;cont<i;cont++){
+						char_temp=rubrica[cont].cognome.toLowerCase().charAt(rubrica[cont].cognome.length()-1);
+						if(char_temp!='a' && char_temp!='e' && char_temp!='i' && char_temp!='o' && char_temp!='u'){
+							temp++;
+							trovato=true;
+						}
+					}
+					if(!trovato){
+						System.out.println("non ci sono cognomi che finiscono con una consonante");
+					}else{
+						System.out.println("numero di cognomi che finiscono con una consonante: "+temp);
 					}
 					break;
 
