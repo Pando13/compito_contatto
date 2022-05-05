@@ -20,12 +20,13 @@ class TestContatto{
 			System.out.println("premi 7 per conoscere quanti cognomi iniziano con la lettera 'A'");
 			System.out.println("premi 8 per calcolare l'età media");
 			System.out.println("premi 9 per contare quanti contatti hanno un'età maggiore della media");
-			System.out.println("premi 10 per l'età massima");
-			System.out.println("premi 11 per l'età minima");
+			System.out.println("premi 10 per l'eta' massima");
+			System.out.println("premi 11 per l'eta' minima");
 			System.out.println("premi 12 per contare quanti nomi contengono la stringa anna");
 			System.out.println("premi 13 per prendere una stringa in input e contare quanti nomi contengono la stringa");
-			System.out.println("premi 14 per contare quanti cognomi finiscono con la lettera 'a'");
-			System.out.println("premi 15 per contare quanti cognomi finiscono con una consonante");
+			System.out.println("premi 14 per contare quanti nomi finiscono con la lettera 'a'");
+			System.out.println("premi 15 per contare quanti nomi finiscono con una consonante");
+			System.out.println("premi 16 per contare quanti contanti hanno il doppio nome");
 
 			scelta=input.nextInt();
 			vuota=input.nextLine();	
@@ -248,9 +249,9 @@ class TestContatto{
 						}
 					}
 					if(!trovato){
-						System.out.println("non ci sono contatti che hanno un nome contenente la parola 'anna'");
+						System.out.println("non ci sono contatti che hanno un nome contenente la stringa 'anna'");
 					}else{
-						System.out.println("numero di contatti che hanno un nome contenente la parola 'anna': "+temp);
+						System.out.println("numero di contatti che hanno un nome contenente la stringa 'anna': "+temp);
 					}
 					break;
 
@@ -266,9 +267,9 @@ class TestContatto{
 						}
 					}
 					if(!trovato){
-						System.out.println("non ci sono contatti che hanno un nome contenente la parola '"+nome_temp+"'");
+						System.out.println("non ci sono contatti che hanno un nome contenente la stringa '"+nome_temp+"'");
 					}else{
-						System.out.println("numero di contatti che hanno un nome contenente la parola '"+nome_temp+"': "+temp);
+						System.out.println("numero di contatti che hanno un nome contenente la stringa '"+nome_temp+"': "+temp);
 					}
 					break;
 
@@ -276,15 +277,15 @@ class TestContatto{
 					temp=0;
 					trovato=false;
 					for(cont=0;cont<i;cont++){
-						if(rubrica[cont].cognome.toUpperCase().charAt(rubrica[cont].cognome.length()-1)=='A'){
+						if(rubrica[cont].nome.toUpperCase().charAt(rubrica[cont].nome.length()-1)=='A'){
 							temp++;
 							trovato=true;
 						}
 					}
 					if(!trovato){
-						System.out.println("non ci sono cognomi che finiscono con 'a'");
+						System.out.println("non ci sono nomi che finiscono con 'a'");
 					}else{
-						System.out.println("numero di cognomi che finiscono con 'a': "+temp);
+						System.out.println("numero di nomi che finiscono con 'a': "+temp);
 					}
 					break;
 
@@ -292,16 +293,33 @@ class TestContatto{
 					temp=0;
 					trovato=false;
 					for(cont=0;cont<i;cont++){
-						char_temp=rubrica[cont].cognome.toLowerCase().charAt(rubrica[cont].cognome.length()-1);
+						char_temp=rubrica[cont].nome.toLowerCase().charAt(rubrica[cont].nome.length()-1);
 						if(char_temp!='a' && char_temp!='e' && char_temp!='i' && char_temp!='o' && char_temp!='u'){
 							temp++;
 							trovato=true;
 						}
 					}
 					if(!trovato){
-						System.out.println("non ci sono cognomi che finiscono con una consonante");
+						System.out.println("non ci sono nomi che finiscono con una consonante");
 					}else{
-						System.out.println("numero di cognomi che finiscono con una consonante: "+temp);
+						System.out.println("numero di nomi che finiscono con una consonante: "+temp);
+					}
+					break;
+
+				case 16:
+					temp=0;
+					trovato=false;
+					// count how many contacts have 2 word names
+					for(cont=0;cont<i;cont++){
+						if(rubrica[cont].nome.indexOf(" ")!=-1){
+							temp++;
+							trovato=true;
+						}
+					}
+					if(!trovato){
+						System.out.println("non ci sono contatti che hanno il doppio nome");
+					}else{
+						System.out.println("numero di contatti che hanno il doppio nome: "+temp);
 					}
 					break;
 
